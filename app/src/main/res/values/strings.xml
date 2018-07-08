@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Student Profile Creator</string>
+    <string name="staticMood_text">Your current mood:</string>
+    <string name="moodStatic_text">Happy</string>
+    <string name="string_select_avatar">Select your Avatar</string>
+    <string name="name_mainString">Name</string>
+    <string name="email_mainString">Email</string>
+    <string name="department_mainString">Department</string>
+    <string name="sis_mainRadioString">SIS</string>
+    <string name="cis_mainRadioString">CIS</string>
+    <string name="bio_mainRadioString">BIO</string>
+    <string name="submit_mainButtonString">Submit</string>
+    <string name="avatar_selection_image_description">Avatar Selection image</string>
+    <string name="angry_moodBarString">Angry</string>
+    <string name="sad_moodBarString">Sad</string>
+    <string name="happy_moodBarString">Happy</string>
+    <string name="awesome_moodBarString">Awesome</string>
+    <string name="error_moodBarString">ERROR</string>
+</resources>
