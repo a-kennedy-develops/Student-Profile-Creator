@@ -7,23 +7,26 @@ public class Profile implements Parcelable {
     private String name;
     private String email;
     private String department;
-    private String mood;
+    private String moodText;
     private byte[] avatar;
+    private byte[] moodImage;
 
-    public Profile(String name, String email, String department, String mood, byte[] avatar) {
+    Profile(String name, String email, String department, String moodText, byte[] avatar, byte[] moodImage) {
         this.name = name;
         this.email = email;
         this.department = department;
-        this.mood = mood;
+        this.moodText = moodText;
         this.avatar = avatar;
+        this.moodImage = moodImage;
     }
 
     protected Profile(Parcel in) {
         this.name = in.readString();
         this.email = in.readString();
         this.department = in.readString();
-        this.mood = in.readString();
+        this.moodText = in.readString();
         this.avatar = in.createByteArray();
+        this.moodImage = in.createByteArray();
     }
 
     public static final Creator<Profile> CREATOR = new Creator<Profile>() {
@@ -67,12 +70,12 @@ public class Profile implements Parcelable {
         this.department = department;
     }
 
-    public String getMood() {
-        return mood;
+    public String getMoodText() {
+        return moodText;
     }
 
-    public void setMood(String mood) {
-        this.mood = mood;
+    public void setMoodText(String moodText) {
+        this.moodText = moodText;
     }
 
     public byte[] getAvatar() {
@@ -83,13 +86,21 @@ public class Profile implements Parcelable {
         this.avatar = avatar;
     }
 
+    public byte[] getMoodImage() {
+        return moodImage;
+    }
+
+    public void setMoodImage(byte[] moodImage) {
+        this.moodImage = moodImage;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
         dest.writeString(this.email);
         dest.writeString(this.department);
-        dest.writeString(this.mood);
+        dest.writeString(this.moodText);
         dest.writeByteArray(avatar);
-
+        dest.writeByteArray(moodImage);
     }
 }

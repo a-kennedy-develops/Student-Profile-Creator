@@ -7,7 +7,7 @@
     tools:context=".DisplayActivity">
 
     <ImageView
-        android:id="@+id/imageView_catchIntent"
+        android:id="@+id/imageView_avatarDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -24,7 +24,7 @@
         android:layout_marginTop="28dp"
         android:text="Name:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_catchIntent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_avatarDisplay" />
 
     <TextView
         android:id="@+id/textView6"
@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_catchIntent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_avatarDisplay" />
 
     <TextView
         android:id="@+id/textView_sendEmail"

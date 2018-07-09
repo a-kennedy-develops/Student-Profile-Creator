@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 // Retrieving values from editTexts, radioButton, and imageView for Profile object
                 String email = edit_Email.getText().toString();
                 String name = edit_Name.getText().toString();
-                String mood = textMood.getText().toString();
+                String moodText = textMood.getText().toString();
                 String radio;
                 if (radio_SIS.isChecked()) {
                     radio = (String) radio_SIS.getText();
@@ -137,29 +137,28 @@ public class MainActivity extends AppCompatActivity {
                     radio = (String) radio_BIO.getText();
                 }
 
-                // Converting imageView into a Byte Array
+                // Converting imageView contents into a byte array
                 final byte[] avatarArray = AvatarSelector.createByteArrayPNG(imageAvatar);
 
-                //TODO: Transfer byte array as opposed to String for mood
+                // Converting imageView contents into a byte array
                 final byte[] moodArray = AvatarSelector.createByteArrayPNG(imageMood);
 
                 try {
-
                     // Performing input validation
-                    if (!isEmailValid(email) || (!name.matches("[a-zA-Z_ ]*") || !name.equals(""))) {
+                    if (!isEmailValid(email) || (!name.matches("[a-zA-Z_ ]*") || name.equals(""))) {
                         throw new InputMismatchException();
 
                         //Creating Profile object and packaging into intent
                     } else {
                         Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
-                        intent.putExtra(PROFILE_KEY, new Profile(name, email, radio, mood, avatarArray));
+                        intent.putExtra(PROFILE_KEY, new Profile(name, email, radio, moodText, avatarArray, moodArray));
                         Log.d("demo", "Pre-Start flag");
                         startActivity(intent);
                     }
 
                     //For failed input validation
                 } catch (InputMismatchException e) {
-                    if (!isEmailValid(email) && (!name.matches("[a-zA-Z_ ]*") || !name.equals(""))) {
+                    if (!isEmailValid(email) && (!name.matches("[a-zA-Z_ ]*") || name.equals(""))) {
                         Toast.makeText(MainActivity.this, "Please re-enter your name and email", Toast.LENGTH_LONG).show();
                     } else if (!isEmailValid(email)) {
                         Toast.makeText(MainActivity.this, "Please re-enter your email", Toast.LENGTH_LONG).show();
@@ -178,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 ImageButton imageAvatar = findViewById(R.id.imageButton_avatar);
 
-                Bitmap bitmap = DisplayActivity.ByteArrayToBitmap(data.getByteArrayExtra(VALUE_KEY));
+                Bitmap bitmap = DisplayActivity.convertByteArrayToBitmap(data.getByteArrayExtra(VALUE_KEY));
                 imageAvatar.setImageBitmap(bitmap);
 
             } else if (resultCode == RESULT_CANCELED) {

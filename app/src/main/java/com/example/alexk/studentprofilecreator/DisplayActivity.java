@@ -13,77 +13,48 @@ import static com.example.alexk.studentprofilecreator.MainActivity.PROFILE_KEY;
 
 public class DisplayActivity extends AppCompatActivity {
 
-    //This method converts a byte array into a bitmap,
-    //for the purpose of setting an imageView
-    public static Bitmap ByteArrayToBitmap(byte[] byteArray)
-    {
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-    }
+    // This method converts a byte array into a bitmap
+    public static Bitmap convertByteArrayToBitmap(byte[] byteArray) {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length); }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO: Clean up this activity_display layout
         setContentView(R.layout.activity_display);
 
-        Log.d("demo", "Made it to display");
-
+//        Log.d("demo", "Made it to display");
 
         if (getIntent() != null && getIntent().getExtras() != null) {
 
             Profile profile = getIntent().getExtras().getParcelable(PROFILE_KEY);
-            Log.d("demo", "PROFILE");
+            Log.d("demo", "Extracting profile data from intent...");
 
+            //Setting student name
+            TextView studentName = findViewById(R.id.textView_sendName);
+            studentName.setText(profile.getName());
 
-            TextView leName = findViewById(R.id.textView_sendName);
-            leName.setText(profile.getName());
+            //Setting student email
+            TextView studentEmail = findViewById(R.id.textView_sendEmail);
+            studentEmail.setText(profile.getEmail());
 
-            TextView leEmail = findViewById(R.id.textView_sendEmail);
-            leEmail.setText(profile.getEmail());
+            //Setting department
+            TextView department = findViewById(R.id.textView_sendDepart);
+            department.setText(profile.getDepartment());
 
-            TextView leDepartment = findViewById(R.id.textView_sendDepart);
-            leDepartment.setText(profile.getDepartment());
+            //Setting student mood (String)
+            TextView moodText = findViewById(R.id.textView_sendMood);
+            moodText.setText(profile.getMoodText());
 
-            TextView leMood = findViewById(R.id.textView_sendMood);
-            leMood.setText(profile.getMood());
-            String leMood_text = (String) leMood.getText();
+            //Setting mood image view
+            ImageView imageViewMood = findViewById(R.id.imageView_moodDisplay);
+            Bitmap bitmapMoodIntent = convertByteArrayToBitmap(profile.getMoodImage());
+            imageViewMood.setImageBitmap(bitmapMoodIntent);
 
-            ImageView imageView_mood = findViewById(R.id.imageView_moodDisplay);
-            switch (leMood_text) {
-                case "Happy": {
-                    imageView_mood.setImageResource(R.drawable.happy);
-                    break;
-                }
-
-                case "Sad": {
-                    imageView_mood.setImageResource(R.drawable.sad);
-                    break;
-                }
-
-                case "Angry": {
-                    imageView_mood.setImageResource(R.drawable.angry);
-                    break;
-                }
-
-                case "Awesome": {
-                    imageView_mood.setImageResource(R.drawable.awesome);
-                    break;
-                }
-
-
-                default: {
-                    imageView_mood.setImageResource(R.drawable.happy);
-                    break;
-                }
-            }
-
-            ImageView imageView_catch = findViewById(R.id.imageView_catchIntent);
-            Log.d("demo", "BAtoBIT");
-
-            Bitmap bitmap_intent = BitmapFactory.decodeByteArray(profile.getAvatar(), 0,
-                    profile.getAvatar().length);
-            imageView_catch.setImageBitmap(bitmap_intent);
-
-
+            //Setting Avatar image view
+            ImageView imageViewAvatar = findViewById(R.id.imageView_avatarDisplay);
+            Bitmap bitmapAvatarIntent = convertByteArrayToBitmap(profile.getAvatar());
+            imageViewAvatar.setImageBitmap(bitmapAvatarIntent);
 
         }
     }
